@@ -3,8 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
+ 
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "migrate": "knex migrate:latest",
+    "migrate:down": "knex migrate:down",
+    "migrate:rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
+    "dbsetup": "knex migrate:latest && knex seed:run"
   },
   "keywords": [],
   "author": "",
