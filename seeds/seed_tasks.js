@@ -14,7 +14,7 @@ export async function seed(knex) {
       is_completed: false,
       start_time: new Date('2024-10-17 09:00:00'),
       end_time: new Date('2024-10-17 11:00:00'),
-      status: 'active',  // You may need to adjust this column in your schema if not yet added
+      status: 'active',  
     },
     {
       list_type: 'diet',
