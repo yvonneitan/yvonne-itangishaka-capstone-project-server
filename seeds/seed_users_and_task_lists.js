@@ -13,7 +13,7 @@ export async function seed(knex) {
     {
       username: 'JohnDoe',
       email: 'johndoe@example.com',
-      password: 'password123', // Hash passwords in a real application
+      password: 'password123', 
       created_at: new Date(),
     },
   ]).returning('id'); // Capture the inserted user ID
@@ -35,7 +35,7 @@ export async function seed(knex) {
       name: 'Shopping List',
       created_at: new Date(),
     },
-  ]).returning('id'); // Capture the inserted list IDs
+  ]).returning('id'); 
 
   // Insert multiple tasks for each list
   await knex('tasks').insert([
