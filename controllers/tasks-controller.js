@@ -76,3 +76,25 @@ export const deleteTaskById = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const getListTasks = async (req, res) => {
+  const listName = req.query.listName;
+
+  console.log("List Name:", listName);
+
+  if (!listName) {
+      return res.status(400).json({ error: 'List Name is required' });
+  }
+
+  try {
+      // Query the database to get tasks only from the specified list name
+      const tasks = await db('tasks')
+          .select('tasks.id', 'tasks.task', 'tasks.status', 'tasks.start_time', 'tasks.end_time')
+          .join('task_lists', 'tasks.list_id', 'task_lists.id') 
+          .where({ 'task_lists.name': listName });              
+      res.json(tasks);
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'An error occurred while fetching tasks' });
+  }
+};

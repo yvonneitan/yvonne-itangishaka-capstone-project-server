@@ -7,7 +7,8 @@ import {
   getTaskById,
   addTask,
   updateTaskById,
-  deleteTaskById
+  deleteTaskById,
+  getListTasks
 } from "../controllers/tasks-controller.js";
 
 const router = express.Router(); 
@@ -28,6 +29,9 @@ router.put('/:id', updateTaskById);
 
 // Route to delete a task by ID
 router.delete('/:id', deleteTaskById);
+
+//Route to get tasks related to a list
+router.get('/', getListTasks);
 
 // Export the router
 export default router;
