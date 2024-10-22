@@ -53,11 +53,20 @@ export async function seed(knex) {
     {
       user_id: userId,
       list_id: workTasksListId, // Work Tasks
+      task: 'Capstone project report',
+      is_completed: false,
+      start_time: new Date('2024-11-17 09:00:00'),
+      end_time: new Date('2024-11-17 11:00:00'),
+      status: 'active',
+    },
+    {
+      user_id: userId,
+      list_id: workTasksListId, // Work Tasks
       task: 'Team meeting',
-      is_completed: true,
+      is_completed: false,
       start_time: new Date('2024-10-17 13:00:00'),
       end_time: new Date('2024-10-17 14:00:00'),
-      status: 'completed',
+      status: 'active',
     },
     {
       user_id: userId,
@@ -72,10 +81,10 @@ export async function seed(knex) {
       user_id: userId,
       list_id: personalTasksListId, // Personal Tasks
       task: 'Watch Inception',
-      is_completed: true,
+      is_completed: false,
       start_time: new Date('2024-10-16 18:00:00'),
       end_time: new Date('2024-10-16 20:30:00'),
-      status: 'completed',
+      status: 'active',
     },
     {
       user_id: userId,
