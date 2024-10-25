@@ -192,10 +192,10 @@ export async function seed(knex) {
       user_id: userId,
       list_id: destinationsListId,
       task: 'Explore New York City',
-      is_completed: false,
+      is_completed:true,
       start_time: new Date('2025-07-01 10:00:00'),
       end_time: new Date('2025-07-15 18:00:00'),
-      status: 'active',
+      status: 'completed',
     },
     {
       user_id: userId,
@@ -210,10 +210,10 @@ export async function seed(knex) {
       user_id: userId,
       list_id: destinationsListId,
       task: 'Visit Sydney',
-      is_completed: false,
+      is_completed: true,
       start_time: new Date('2025-09-01 10:00:00'),
       end_time: new Date('2025-09-10 18:00:00'),
-      status: 'active',
+      status: 'completed',
     },
   ]);
 }
