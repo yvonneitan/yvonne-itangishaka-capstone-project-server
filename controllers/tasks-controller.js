@@ -34,17 +34,24 @@ export const getTaskById = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
 // Controller to add a new task
 export const addTask = async (req, res) => {
-  const { list_type, task, start_time, end_time } = req.body;
+  const { list_id, task, start_time, end_time, user_id } = req.body; 
   try {
-    await db('tasks').insert({ list_type, task, start_time, end_time, is_completed: false });
+    await db('tasks').insert({
+      task,
+      start_time,
+      end_time,
+      list_id, 
+      user_id,
+      is_completed: false
+    });
     res.status(201).json({ message: 'Task added!' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 // Controller to update a task by ID
 export const updateTaskById = async (req, res) => {
