@@ -52,19 +52,21 @@ export const addTask = async (req, res) => {
   }
 };
 
-
 // Controller to update a task by ID
 export const updateTaskById = async (req, res) => {
   const { id } = req.params;
-  const { task, is_completed } = req.body;
+  const { task, is_completed, start_time, end_time } = req.body;
   try {
-    const updatedRows = await db('tasks').where({ id }).update({ task, is_completed });
+    const updatedRows = await db('tasks').where({ id }).update({ task, is_completed, start_time, end_time });
+    ;
     if (updatedRows) {
       res.json({ message: 'Task updated!' });
     } else {
       res.status(404).json({ message: 'Task not found' });
     }
   } catch (err) {
+    console.error("Error updating task:", err); // Log error details
+
     res.status(500).json({ error: err.message });
   }
 };

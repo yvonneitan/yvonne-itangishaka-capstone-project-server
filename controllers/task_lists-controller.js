@@ -45,3 +45,26 @@ export const createTaskList = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while creating the task list' });
     }
 };
+export const deleteTaskList = async (req, res) => {
+    const { id } = req.params;
+    console.log("Request to delete Task List ID:", id); 
+
+    if (!id) {
+        return res.status(400).json({ error: 'Task List ID is required' });
+    }
+
+    try {
+        const deletedCount = await db('task_lists').where({ id }).del();
+   
+        if (deletedCount === 0) {
+            return res.status(404).json({ error: 'Task List not found' });
+        }
+
+        res.status(200).json({ message: 'Task List deleted successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'An error occurred while deleting the task list' });
+    }
+};
+
+
