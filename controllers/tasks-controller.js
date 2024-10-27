@@ -53,23 +53,23 @@ export const addTask = async (req, res) => {
 };
 
 // Controller to update a task by ID
-export const updateTaskById = async (req, res) => {
-  const { id } = req.params;
-  const { task, is_completed, start_time, end_time } = req.body;
-  try {
-    const updatedRows = await db('tasks').where({ id }).update({ task, is_completed, start_time, end_time });
-    ;
-    if (updatedRows) {
-      res.json({ message: 'Task updated!' });
-    } else {
-      res.status(404).json({ message: 'Task not found' });
-    }
-  } catch (err) {
-    console.error("Error updating task:", err); // Log error details
+// export const updateTaskById = async (req, res) => {
+//   const { id } = req.params;
+//   const { task, is_completed, start_time, end_time } = req.body;
+//   try {
+//     const updatedRows = await db('tasks').where({ id }).update({ task, is_completed, start_time, end_time });
+//     ;
+//     if (updatedRows) {
+//       res.json({ message: 'Task updated!' });
+//     } else {
+//       res.status(404).json({ message: 'Task not found' });
+//     }
+//   } catch (err) {
+//     console.error("Error updating task:", err); 
 
-    res.status(500).json({ error: err.message });
-  }
-};
+//     res.status(500).json({ error: err.message });
+//   }
+// };
 
 // Controller to delete a task by ID
 export const deleteTaskById = async (req, res) => {
@@ -105,5 +105,48 @@ export const getListTasks = async (req, res) => {
   } catch (err) {
       console.error(err);
       res.status(500).json({ error: 'An error occurred while fetching tasks' });
+  }
+};
+// export const updateTaskById = async (req, res) => {
+//   const { id } = req.params;
+//   const { task, is_completed, start_time, end_time } = req.body;
+//   try {
+//     const updatedRows = await db('tasks').where({ id }).update({ task, is_completed, start_time, end_time });
+//     if (updatedRows) {
+//       res.json({ message: 'Task updated!' });
+//     } else {
+//       res.status(404).json({ message: 'Task not found' });
+//     }
+//   } catch (err) {
+//     console.error("Error updating task:", err); // Log the error
+//     res.status(500).json({ error: 'Failed to update task', details: err.message });
+//   }
+// };
+export const updateTaskById = async (req, res) => {
+  const { id } = req.params;
+  const { task, is_completed, start_time, end_time } = req.body;
+
+  // Initialize an update object
+  const updateData = { task, is_completed };
+
+  // Format dates if they exist
+  if (start_time) {
+    updateData.start_time = new Date(start_time).toISOString().slice(0, 19).replace('T', ' ');
+  }
+  if (end_time) {
+    updateData.end_time = new Date(end_time).toISOString().slice(0, 19).replace('T', ' ');
+  }
+
+  try {
+    const updatedRows = await db('tasks').where({ id }).update(updateData);
+    
+    if (updatedRows) {
+      res.json({ message: 'Task updated!' });
+    } else {
+      res.status(404).json({ message: 'Task not found' });
+    }
+  } catch (err) {
+    console.error("Error updating task:", err);
+    res.status(500).json({ error: 'Failed to update task', details: err.message });
   }
 };

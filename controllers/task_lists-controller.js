@@ -67,4 +67,29 @@ export const deleteTaskList = async (req, res) => {
     }
 };
 
+export const updateTaskList = async (req, res) => {
+    const { id } = req.params; 
+    const { name } = req.body; 
+
+    console.log("Updating Task List ID:", id, "with name:", name);
+
+    if (!id || !name) {
+        return res.status(400).json({ error: 'Task List ID and name are required' });
+    }
+
+    try {
+        const updatedCount = await db('task_lists')
+            .where({ id }) 
+            .update({ name }); 
+
+        if (updatedCount === 0) {
+            return res.status(404).json({ error: 'Task List not found' });
+        }
+
+        res.status(200).json({ message: 'Task List updated successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'An error occurred while updating the task list' });
+    }
+};
 
