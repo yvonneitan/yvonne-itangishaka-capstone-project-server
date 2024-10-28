@@ -1,13 +1,17 @@
 // export default router;
-import express from 'express';
-import { getTaskListsByUserId,createTaskList,deleteTaskList, updateTaskList } from '../controllers/task_lists-controller.js'; 
+import express from "express";
+import * as taskListsContoller from "../controllers/task_lists-controller.js";
 
-const router = express.Router(); 
+const router = express.Router();
 
 // Route to get task lists by user ID
-router.get('/task-lists', getTaskListsByUserId);
-router.post('/task-lists', createTaskList); 
-router.delete('/task-lists/:id', deleteTaskList); 
-router.put('/task-lists/:id', updateTaskList); 
+router
+  .route("/task-lists")
+  .get(taskListsContoller.getTaskListsByUserId)
+  .post(taskListsContoller.createTaskList);
+router
+  .route("/task-lists/:id")
+  .delete(taskListsContoller.deleteTaskList)
+  .put(taskListsContoller.updateTaskList);
 
 export default router;
