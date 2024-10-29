@@ -141,6 +141,24 @@ export async function seed(knex) {
       end_time: new Date("2024-10-17 14:00:00"),
       status: "active",
     },
+    {
+      user_id: userId,
+      list_id: workTasksListId,
+      task: "Submit annual report",
+      is_completed: true,
+      start_time: new Date("2024-10-10 08:00:00"),
+      end_time: new Date("2024-10-10 11:00:00"),
+      status: "completed",
+    },
+    {
+      user_id: userId,
+      list_id: personalTasksListId,
+      task: "Organize closet",
+      is_completed: true,
+      start_time: new Date("2024-10-12 15:00:00"),
+      end_time: new Date("2024-10-12 17:00:00"),
+      status: "completed",
+    },
 
     // Personal Tasks
     {
@@ -181,6 +199,16 @@ export async function seed(knex) {
       end_time: new Date("2024-10-19 11:00:00"),
       status: "active",
     },
+    {
+      user_id: userId,
+      list_id: shoppingListId,
+      task: "Buy new workout gear",
+      is_completed: true,
+      start_time: new Date("2024-10-15 10:00:00"),
+      end_time: new Date("2024-10-15 11:00:00"),
+      status: "completed",
+    },
+  
 
     // Movies List
     {
@@ -255,6 +283,15 @@ export async function seed(knex) {
       is_completed: true,
       start_time: new Date("2025-07-01 10:00:00"),
       end_time: new Date("2025-07-15 18:00:00"),
+      status: "completed",
+    },
+    {
+      user_id: userId,
+      list_id: destinationsListId,
+      task: "See the Great Wall of China",
+      is_completed: true,
+      start_time: new Date("2024-10-03 08:00:00"),
+      end_time: new Date("2024-10-03 18:00:00"),
       status: "completed",
     },
     {
