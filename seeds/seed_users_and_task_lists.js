@@ -25,6 +25,11 @@ export async function seed(knex) {
     shoppingListId,
     moviesListId,
     destinationsListId,
+    fitnessTasksListId,
+    readingListId,
+    financeListId,
+    learningListId,
+    travelPrepListId,
   ] = await Promise.all([
     knex("task_lists")
       .insert({
@@ -65,6 +70,45 @@ export async function seed(knex) {
         created_at: new Date(),
       })
       .then((result) => result[0]),
+      knex("task_lists")
+    .insert({
+      user_id: userId,
+      name: "Fitness Goals",
+      created_at: new Date(),
+    })
+    .then((result) => result[0]),
+
+  knex("task_lists")
+    .insert({
+      user_id: userId,
+      name: "Reading List",
+      created_at: new Date(),
+    })
+    .then((result) => result[0]),
+
+  knex("task_lists")
+    .insert({
+      user_id: userId,
+      name: "Finance",
+      created_at: new Date(),
+    })
+    .then((result) => result[0]),
+
+  knex("task_lists")
+    .insert({
+      user_id: userId,
+      name: "Learning",
+      created_at: new Date(),
+    })
+    .then((result) => result[0]),
+
+  knex("task_lists")
+    .insert({
+      user_id: userId,
+      name: "Travel Preparation",
+      created_at: new Date(),
+    })
+    .then((result) => result[0]),
   ]);
 
   // Insert multiple tasks for each list
@@ -231,5 +275,104 @@ export async function seed(knex) {
       end_time: new Date("2025-09-10 18:00:00"),
       status: "completed",
     },
+    // Fitness Goals
+  {
+    user_id: userId,
+    list_id: fitnessTasksListId,
+    task: "Morning Yoga",
+    is_completed: false,
+    start_time: new Date("2024-10-17 06:30:00"),
+    end_time: new Date("2024-10-17 07:00:00"),
+    status: "active",
+  },
+  {
+    user_id: userId,
+    list_id: fitnessTasksListId,
+    task: "Run 5k",
+    is_completed: false,
+    start_time: new Date("2024-10-18 07:00:00"),
+    end_time: new Date("2024-10-18 08:00:00"),
+    status: "active",
+  },
+
+  // Reading List
+  {
+    user_id: userId,
+    list_id: readingListId,
+    task: "Read 'Atomic Habits'",
+    is_completed: false,
+    start_time: new Date("2024-10-17 19:00:00"),
+    end_time: new Date("2024-10-17 20:30:00"),
+    status: "active",
+  },
+  {
+    user_id: userId,
+    list_id: readingListId,
+    task: "Finish '1984' by George Orwell",
+    is_completed: false,
+    start_time: new Date("2024-10-20 19:00:00"),
+    end_time: new Date("2024-10-20 21:00:00"),
+    status: "active",
+  },
+
+  // Finance
+  {
+    user_id: userId,
+    list_id: financeListId,
+    task: "Review monthly budget",
+    is_completed: false,
+    start_time: new Date("2024-10-22 10:00:00"),
+    end_time: new Date("2024-10-22 11:00:00"),
+    status: "active",
+  },
+  {
+    user_id: userId,
+    list_id: financeListId,
+    task: "Pay credit card bill",
+    is_completed: false,
+    start_time: new Date("2024-10-23 09:00:00"),
+    end_time: new Date("2024-10-23 09:30:00"),
+    status: "active",
+  },
+
+  // Learning
+  {
+    user_id: userId,
+    list_id: learningListId,
+    task: "Complete JavaScript tutorial",
+    is_completed: false,
+    start_time: new Date("2024-10-24 14:00:00"),
+    end_time: new Date("2024-10-24 15:30:00"),
+    status: "active",
+  },
+  {
+    user_id: userId,
+    list_id: learningListId,
+    task: "Watch a TED Talk on productivity",
+    is_completed: false,
+    start_time: new Date("2024-10-25 12:00:00"),
+    end_time: new Date("2024-10-25 12:30:00"),
+    status: "active",
+  },
+
+  // Travel Preparation
+  {
+    user_id: userId,
+    list_id: travelPrepListId,
+    task: "Pack luggage for weekend trip",
+    is_completed: false,
+    start_time: new Date("2024-10-26 15:00:00"),
+    end_time: new Date("2024-10-26 17:00:00"),
+    status: "active",
+  },
+  {
+    user_id: userId,
+    list_id: travelPrepListId,
+    task: "Check-in for flight",
+    is_completed: false,
+    start_time: new Date("2024-10-26 18:00:00"),
+    end_time: new Date("2024-10-26 18:30:00"),
+    status: "active",
+  },
   ]);
 }
