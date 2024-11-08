@@ -31,19 +31,33 @@
 
 // // Export the app to handle HTTP requests for this route
 // export default (req, res) => app(req, res);
-import express from 'express';
-import * as taskListsController from '../controllers/task_lists-controller.js';
+
+
+// import express from 'express';
+// import * as taskListsController from '../controllers/task_lists-controller.js';
+
+// const app = express();
+
+// // Middleware to parse JSON
+// app.use(express.json());
+
+// // Route definitions
+// app.get('/api/task-lists', taskListsController.getTaskListsByUserId);
+// app.post('/api/task-lists', taskListsController.createTaskList);
+// app.delete('/api/task-lists/:id', taskListsController.deleteTaskList);
+// app.put('/api/task-lists/:id', taskListsController.updateTaskList);
+
+// // Export the app to handle HTTP requests for this route
+// export default (req, res) => app(req, res);
+import express from "express";
+import * as taskListsController from "../controllers/task_lists-controller.js";
 
 const app = express();
-
-// Middleware to parse JSON
 app.use(express.json());
 
-// Route definitions
 app.get('/api/task-lists', taskListsController.getTaskListsByUserId);
 app.post('/api/task-lists', taskListsController.createTaskList);
 app.delete('/api/task-lists/:id', taskListsController.deleteTaskList);
 app.put('/api/task-lists/:id', taskListsController.updateTaskList);
 
-// Export the app to handle HTTP requests for this route
-export default (req, res) => app(req, res);
+export default app;
