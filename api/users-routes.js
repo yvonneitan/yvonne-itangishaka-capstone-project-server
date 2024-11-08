@@ -40,17 +40,21 @@
 import express from 'express';
 import * as usersController from '../controllers/users-controller.js';
 
-const app = express();
+const router = express.Router();
 
 // Middleware to parse JSON
-app.use(express.json());
+router.use(express.json());
 
 // Route definitions
-app.get('/api/users', usersController.getAllUsers);
-app.post('/api/users', usersController.createUser);
-app.get('/api/users/:id', usersController.getUserById);
-app.put('/api/users/:id', usersController.updateUserById);
-app.delete('/api/users/:id', usersController.deleteUserById);
+router.get('/users', usersController.getAllUsers);
+router.post('/users', usersController.createUser);
+router.get('/users/:id', usersController.getUserById);
+router.put('/users/:id', usersController.updateUserById);
+router.delete('/users/:id', usersController.deleteUserById);
 
-// Export the app to handle HTTP requests for this route
-export default (req, res) => app(req, res);
+// Export a Vercel-friendly serverless function
+export default (req, res) => {
+  const app = express();
+  app.use(router);
+  app(req, res); // Handle the request
+};

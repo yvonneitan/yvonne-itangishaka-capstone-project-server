@@ -50,19 +50,23 @@
 import express from 'express';
 import * as tasksController from '../controllers/tasks-controller.js';
 
-const app = express();
+const router = express.Router();
 
 // Middleware to parse JSON
-app.use(express.json());
+router.use(express.json());
 
 // Route definitions
-app.post('/api/tasks', tasksController.addTask);
-app.get('/api/tasks', tasksController.getListTasks);
-app.get('/api/tasks/active', tasksController.getActiveTasks);
-app.get('/api/tasks/completed', tasksController.getCompleteTasks);
-app.get('/api/tasks/:id', tasksController.getTaskById);
-app.put('/api/tasks/:id', tasksController.updateTaskById);
-app.delete('/api/tasks/:id', tasksController.deleteTaskById);
+router.post('/tasks', tasksController.addTask);
+router.get('/tasks', tasksController.getListTasks);
+router.get('/tasks/active', tasksController.getActiveTasks);
+router.get('/tasks/completed', tasksController.getCompleteTasks);
+router.get('/tasks/:id', tasksController.getTaskById);
+router.put('/tasks/:id', tasksController.updateTaskById);
+router.delete('/tasks/:id', tasksController.deleteTaskById);
 
-// Export the app to handle HTTP requests for this route
-export default (req, res) => app(req, res);
+// Export a Vercel-friendly serverless function
+export default (req, res) => {
+  const app = express();
+  app.use(router);
+  app(req, res);
+};
