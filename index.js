@@ -19,8 +19,9 @@ app.use(express.json());
 app.use("/api/tasks", tasksRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/lists", taskListRoutes);
-
-
+app.get("/", (req, res) => {
+    res.send("Welcome to the API. Use endpoints like /api/users");
+  });
 app.listen(PORT, () => {
 console.log(`running at http://localhost:${PORT}`);
 });
