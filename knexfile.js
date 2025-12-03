@@ -4,12 +4,21 @@ import "dotenv/config";
  * @type { Object.<string, import("knex").Knex.Config> }
  */
 
+// Validate required environment variables
+const requiredEnvVars = ['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASSWORD'];
+for (const envVar of requiredEnvVars) {
+  if (!process.env[envVar]) {
+    throw new Error(`Missing required environment variable: ${envVar}`);
+  }
+}
+
 export default {
-  client: "mysql2",
+  client: "sqlite3",
   connection: {
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    filename: "./actrack.db"
   },
+  useNullAsDefault: true,
+  migrations: {
+    tableName: 'knex_migrations'
+  }
 };
